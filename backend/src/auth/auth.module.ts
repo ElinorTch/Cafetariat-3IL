@@ -9,9 +9,8 @@ import { User, UserSchema } from 'src/database/entities/user.entity';
   imports: [
     MongooseModule.forRoot('mongodb://localhost:27017/cafet3IL'),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-    AuthenticationModule,
   ],
   controllers: [AuthController],
   providers: [AuthService],
 })
-export class AuthenticationModule {}
+export class AuthModule {}

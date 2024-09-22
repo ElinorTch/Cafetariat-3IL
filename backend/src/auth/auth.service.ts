@@ -17,7 +17,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signUp(userDto: UserDto): Promise<{ access_token: string }> {
+  async signUp(userDto: UserDto): Promise<{ token: string }> {
     const user = new this.userModel(userDto);
     const saltOrRounds = 10;
     const hash = await bcrypt.hash(userDto.password, saltOrRounds);
@@ -26,17 +26,17 @@ export class AuthService {
 
     const payload = { sub: user._id, email: user.email };
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      token: await this.jwtService.signAsync(payload),
     };
   }
 
-  async signIn(userDto: UserDto): Promise<{ access_token: string }> {
+  async signIn(userDto: UserDto): Promise<{ token: string }> {
     const user = await this.getByEMail(userDto.email);
     const isMatch = await bcrypt.compare(userDto.password, user.password);
     if (!isMatch) throw new UnauthorizedException();
     const payload = { sub: user._id, email: user.email };
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      token: await this.jwtService.signAsync(payload),
     };
   }
 

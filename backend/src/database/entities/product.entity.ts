@@ -1,16 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument, Types } from 'mongoose';
 import { Category } from './category.entity';
+import { BaseEntity } from './base.entity';
 
 export type ProductDocument = HydratedDocument<Product>;
 
 @Schema({ timestamps: true })
-export class Product {
+export class Product extends BaseEntity {
   @Prop({ required: true, unique: true })
   name: string;
-
-  @Prop({ required: true })
-  description: string;
 
   @Prop({ required: true })
   price: string;

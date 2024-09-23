@@ -1,0 +1,109 @@
+<div class="w-full h-full flex flex-col justify-center items-center gap-4">
+  <img src="assets/auth/logo-blue.png" class="rounded-full h-42 w-32" alt="" />
+  <h1 class="font-semibold text-[25px] text-center">SignUp to your account</h1>
+  <div class="w-full flex flex-col justify-center items-center">
+    <form
+      [formGroup]="form"
+      (ngSubmit)="signUp()"
+      action=""
+      class="max-w-[500px] w-full h-full flex flex-col gap-4"
+    >
+      <div>
+        <div>
+          <label
+            for="firstName"
+            class="block text-sm font-medium leading-6 text-gray-900"
+            >First name<span class="text-red-500">*</span></label
+          >
+          <div class="mt-2">
+            <input
+              id="firstName"
+              type="text"
+              autocomplete="first-name"
+              formControlName="firstName"
+              required
+              placeholder="John"
+              class="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:border-transparent focus:ring-inset focus:ring-charte-blue sm:text-sm sm:leading-6"
+            />
+          </div>
+        </div>
+        <div class="mt-4">
+          <label
+            for="lastName"
+            class="block text-sm font-medium leading-6 text-gray-900"
+            >Last name<span class="text-red-500">*</span></label
+          >
+          <div class="mt-2">
+            <input
+              id="lastName"
+              type="text"
+              autocomplete="last name"
+              formControlName="lastName"
+              required
+              placeholder="Doe"
+              class="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:border-transparent focus:ring-inset focus:ring-charte-blue sm:text-sm sm:leading-6"
+            />
+          </div>
+        </div>
+      </div>
+      <div>
+        <label
+          for="email"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Email address<span class="text-red-500">*</span></label
+        >
+        <div class="mt-2">
+          <input
+            id="email"
+            name="email"
+            type="email"
+            formControlName="email"
+            autocomplete="email"
+            required
+            placeholder="JohnDoe@3il.fr"
+            class="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:border-transparent focus:ring-inset focus:ring-charte-blue sm:text-sm sm:leading-6"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label
+          for="password"
+          class="block text-sm font-medium leading-6 text-gray-900"
+          >Password<span class="text-red-500">*</span></label
+        >
+        <div class="mt-2">
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            autocomplete="password"
+            required
+            placeholder="Password"
+            class="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:border-transparent focus:ring-inset focus:ring-charte-blue sm:text-sm sm:leading-6"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button
+          type="submit"
+          class="mt-2 flex w-full justify-center rounded-md bg-charte-blue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#1f8997] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          [disabled]="form.invalid"
+        >
+          Sign up
+        </button>
+      </div>
+    </form>
+    <div class="mt-4">
+      Already have an account ?
+      <a
+        routerLink="/auth/signin"
+        routerLinkActive="router-link-active"
+        class="text-charte-blue underline"
+      >
+        Login
+      </a>
+    </div>
+  </div>
+</div>

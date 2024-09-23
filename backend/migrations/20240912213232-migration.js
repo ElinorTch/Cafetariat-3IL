@@ -5,7 +5,7 @@ module.exports = {
     // Example:
     // await db.collection('albums').updateOne({artist: 'The Beatles'}, {$set: {blacklisted: true}});
     await db.createCollection("users")
-    await db.createCollection("produits")
+    await db.createCollection("products")
     await db.createCollection("categories")
   },
 
@@ -14,7 +14,7 @@ module.exports = {
     // Example:
     // await db.collection('albums').updateOne({artist: 'The Beatles'}, {$set: {blacklisted: false}});
     await db.createCollection("users").drop()
-    await db.createCollection("produits").drop()
+    await db.createCollection("products").drop()
     await db.collection("categories").drop()
   }
 };

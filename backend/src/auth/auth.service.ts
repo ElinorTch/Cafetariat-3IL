@@ -3,6 +3,7 @@ import {
   BadRequestException,
   Injectable,
   UnauthorizedException,
+  Request,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from '../database/entities/user.entity';
@@ -17,6 +18,10 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  me(@Request() req: any) {
+    return req.user;
+  }
+
   async signUp(userDto: UserDto): Promise<{ token: string }> {
     const user = new this.userModel(userDto);
     const saltOrRounds = 10;
@@ -24,7 +29,7 @@ export class AuthService {
     user.password = hash;
     user.save();
 
-    const payload = { sub: user._id, email: user.email };
+    const payload = { sub: user._id, email: user.email, role: user.role };
     return {
       token: await this.jwtService.signAsync(payload),
     };
@@ -34,7 +39,7 @@ export class AuthService {
     const user = await this.getByEMail(userDto.email);
     const isMatch = await bcrypt.compare(userDto.password, user.password);
     if (!isMatch) throw new UnauthorizedException();
-    const payload = { sub: user._id, email: user.email };
+    const payload = { sub: user._id, email: user.email, role: user.role };
     return {
       token: await this.jwtService.signAsync(payload),
     };

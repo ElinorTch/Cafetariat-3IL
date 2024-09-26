@@ -3,9 +3,9 @@ import mongoose, { HydratedDocument, Types } from 'mongoose';
 import { Product } from './product.entity';
 import { BaseEntity } from './base.entity';
 import { Reservation } from './reservation.entity';
-import { Statut } from '../enum/statut';
+import { Status } from '../enum/status';
 
-export type CategoryDocument = HydratedDocument<ReservationItem>;
+export type ReservationItemDocument = HydratedDocument<ReservationItem>;
 
 @Schema({ timestamps: true })
 export class ReservationItem extends BaseEntity {
@@ -15,8 +15,8 @@ export class ReservationItem extends BaseEntity {
   @Prop({ required: true, unique: false })
   total: string;
 
-  @Prop({ required: true, unique: true })
-  status: Statut;
+  @Prop({ required: true, unique: false })
+  status: Status;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Reservation' })
   Reservation: Reservation;
@@ -25,4 +25,5 @@ export class ReservationItem extends BaseEntity {
   products: Product;
 }
 
-export const CategorySchema = SchemaFactory.createForClass(ReservationItem);
+export const ReservationItemSchema =
+  SchemaFactory.createForClass(ReservationItem);

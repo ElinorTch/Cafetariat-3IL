@@ -5,6 +5,7 @@ import {
   Post,
   UseGuards,
   Request,
+  Put,
 } from '@nestjs/common';
 import { User } from 'src/database/entities/user.entity';
 import { AuthService } from './auth.service';
@@ -36,5 +37,10 @@ export class AuthController {
   @Get()
   async findAll(): Promise<User[]> {
     return this.usersService.findAll();
+  }
+
+  @Put()
+  async update(@Body() userDto: UserDto): Promise<User>{
+    return this.usersService.update(userDto);
   }
 }

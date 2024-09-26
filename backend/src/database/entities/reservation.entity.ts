@@ -17,9 +17,7 @@ export class Reservation extends BaseEntity {
   })
   reservationItem: ReservationItem[];
 
-  @Prop({
-    type: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   user: User;
 }
 

@@ -19,7 +19,7 @@ export class User extends BaseEntity {
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reservation' }],
   })
-  reservationItem: Reservation[];
+  reservation: Reservation[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { AuthService } from 'src/auth/auth.service';
 import { ReservationDto } from 'src/database/dto/reservation.dto';
 import { Reservation } from 'src/database/entities/reservation.entity';
+import { User } from 'src/database/entities/user.entity';
 
 @Injectable()
 export class ReservationService {
@@ -14,13 +15,9 @@ export class ReservationService {
 
   async create(reservationDto: ReservationDto) {
     const reservation = new this.reservationModel(reservationDto);
-    console.log(this.auth.getUser());
-    reservation.user = this.auth.getUser();
-    // const category = await this.categoryService.findById(productDto.categoryId);
-    // product.category = category; // Utilser les produits plutot
-    const savedReservation = await reservation.save();
-    // this.categoryService.updateCategoryProduct(category, savedProduct);
-    return savedReservation;
+    const user = await this.auth.getById(reservationDto.userId);
+    reservation.user = user;
+    return reservation.save();
   }
 
   async findAll(filters?: { [key: string]: string }): Promise<Reservation[]> {

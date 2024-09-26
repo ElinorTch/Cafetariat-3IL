@@ -11,10 +11,9 @@ import { User } from '../database/entities/user.entity';
 import { UserDto } from '../database/dto/user.dto';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { IS_PUBLIC_KEY } from 'src/database/decorator/public.decorator';
 import { jwtConstants } from './constant';
-import { Reflector } from '@nestjs/core';
 import * as req from 'express';
+import { Reservation } from 'src/database/entities/reservation.entity';
 
 @Injectable()
 export class AuthService {
@@ -23,7 +22,6 @@ export class AuthService {
   constructor(
     @InjectModel(User.name) private userModel: Model<User>,
     private jwtService: JwtService,
-    private reflector: Reflector,
   ) {}
 
   me(@Request() req: any) {
@@ -67,7 +65,6 @@ export class AuthService {
       // so that we can access it in our route handlers
       request['user'] = payload;
       this.user = await this.getById(payload.sub);
-      console.log(this.getUser());
     } catch {
       throw new UnauthorizedException();
     }
@@ -88,7 +85,7 @@ export class AuthService {
   }
 
   async getById(id: string): Promise<User> {
-    const user = this.userModel.findById({ _id: id });
+    const user = await this.userModel.findOne({ _id: id }).exec();
     if (!user) throw new BadRequestException("This user doesn't exist.");
     return user;
   }

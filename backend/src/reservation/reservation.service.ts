@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Request } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { AuthService } from 'src/auth/auth.service';
@@ -14,8 +14,8 @@ export class ReservationService {
 
   async create(reservationDto: ReservationDto) {
     const reservation = new this.reservationModel(reservationDto);
-    console.log(reservationDto);
-    console.log(reservation);
+    console.log(this.auth.getUser());
+    reservation.user = this.auth.getUser();
     // const category = await this.categoryService.findById(productDto.categoryId);
     // product.category = category; // Utilser les produits plutot
     const savedReservation = await reservation.save();

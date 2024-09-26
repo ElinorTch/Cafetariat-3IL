@@ -1,7 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
+import mongoose, { HydratedDocument, Types } from 'mongoose';
 import { BaseEntity } from './base.entity';
 import { Role } from '../enum/role';
+import { Reservation } from './reservation.entity';
 
 export type UserDocument = HydratedDocument<User>;
 @Schema({ timestamps: true })
@@ -14,6 +15,11 @@ export class User extends BaseEntity {
 
   @Prop({ default: 'user' })
   role: Role;
+
+  @Prop({
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reservation' }],
+  })
+  reservationItem: Reservation[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

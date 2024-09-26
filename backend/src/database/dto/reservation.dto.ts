@@ -3,7 +3,7 @@ import { IsOptional, IsString } from 'class-validator';
 export class ReservationDto {
   @IsString()
   @IsOptional()
-  productId: string;
+  userId: string;
 
   @IsString()
   status: string;

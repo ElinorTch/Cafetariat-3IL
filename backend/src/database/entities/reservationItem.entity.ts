@@ -15,7 +15,7 @@ export class ReservationItem extends BaseEntity {
   @Prop({ required: true, unique: false })
   total: string;
 
-  @Prop({ required: true, unique: false })
+  @Prop({ required: true, unique: false, default: 'pending' })
   status: Status;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Reservation' })

@@ -10,10 +10,10 @@ export type ReservationItemDocument = HydratedDocument<ReservationItem>;
 @Schema({ timestamps: true })
 export class ReservationItem extends BaseEntity {
   @Prop({ required: true, unique: false })
-  quantity: string;
+  quantity: number;
 
-  @Prop({ required: true, unique: false })
-  total: string;
+  @Prop({ required: false, unique: false })
+  total: number;
 
   @Prop({ required: true, unique: false, default: 'pending' })
   status: Status;

@@ -6,18 +6,22 @@ import { ReservationDto } from 'src/database/dto/reservation.dto';
 import { ReservationItemDto } from 'src/database/dto/reservationItem.dto';
 import { Reservation } from 'src/database/entities/reservation.entity';
 import { ReservationItem } from 'src/database/entities/reservationItem.entity';
+import { ProductService } from 'src/product/product.service';
 
 @Injectable()
 export class ReservationItemService {
   constructor(
     @InjectModel(ReservationItem.name)
     private reservationItemModel: Model<ReservationItem>,
-    private auth: AuthService,
+    private productService: ProductService,
   ) {}
 
   async create(reservationItemDto: ReservationItemDto) {
     const reservationItem = new this.reservationItemModel(reservationItemDto);
-    // const category = await this.categoryService.findById(productDto.categoryId);
+    const product = await this.productService.getById(
+      reservationItemDto.productId,
+    );
+    reservationItem.total = product.price * reservationItem.quantity;
     // product.category = category; // Utilser les produits plutot
     const savedItem = await reservationItem.save();
     // this.categoryService.updateCategoryProduct(category, savedProduct);
@@ -27,6 +31,6 @@ export class ReservationItemService {
   async findAll(filters?: {
     [key: string]: string;
   }): Promise<ReservationItem[]> {
-    return this.reservationItemModel.find().populate('reservationItem').exec();
+    return this.reservationItemModel.find();
   }
 }

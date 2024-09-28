@@ -4,7 +4,6 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   hugeBookmarkCheck01,
   hugeBookmarkRemove01,
-  hugeBookmark02,
   hugeBookmark01,
 } from '@ng-icons/huge-icons';
 

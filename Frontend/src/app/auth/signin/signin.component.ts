@@ -32,7 +32,7 @@ export class SigninComponent {
     this.authService.login(this.form.getRawValue()).subscribe({
       next: (response) => {
         localStorage.setItem('access_token', response.token);
-        this.router.navigate(['/test']);
+        this.router.navigate(['/']);
       },
       error: (err) => {
         console.log(err);

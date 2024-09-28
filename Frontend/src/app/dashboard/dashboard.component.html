@@ -1,73 +1,35 @@
-<nav class="bg-white shadow-md p-4 flex justify-center items-center">
-  <!-- Logo à gauche -->
-  <div class="absolute left-4 flex items-center">
-    <img src="path-to-logo.png" alt="Logo" class="h-8 w-8" />
+<div class="mt-10 flex flex-col gap-10">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
+    <app-dashboard-card
+      [value]="5"
+      description="Commandes en cours"
+    ></app-dashboard-card>
+    <app-dashboard-card
+      [value]="5"
+      description="Commandes traitées"
+    ></app-dashboard-card>
+    <app-dashboard-card
+      [value]="5"
+      description="Commandes annulées"
+    ></app-dashboard-card>
   </div>
 
-  <!-- Lien Dashboard et All products au centre -->
-  <div class="flex items-center space-x-10 ml-auto"> <!-- Utilisez space-x-8 pour définir l'espace -->
-    <div class=""><a href="#" routerLink="/" routerLinkActive="active" class="text-teal-500 text-lg font-medium hover:underline nav-link">Dashboard</a></div>
-    <div class=""><a href="@" routerLink="products" routerLinkActive="active" class="hover:text-teal-500 font-medium nav-link">All products</a></div>
-    <div class="h-8 w-8 rounded-full border border-gray-300 flex justify-center items-center">
-      <!-- Cercle vide -->
+  <div class="flex flex-col gap-5">
+    <div
+      class="flex gap-5 sm:gap-10 text-gray-500 font-medium border-b border-gray-300 pb-2"
+    >
+      <a href="#" class="text-charte-blue">Tout</a>
+      <a href="#" class="hover:text-teal-500">En cours</a>
+      <a href="#" class="hover:text-teal-500">Traitee</a>
+      <a href="#" class="hover:text-teal-500">Terminee</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-5">
+      <app-reservation-card></app-reservation-card>
+      <app-reservation-card></app-reservation-card>
+      <app-reservation-card></app-reservation-card>
+      <app-reservation-card></app-reservation-card>
+      <app-reservation-card></app-reservation-card>
+      <app-reservation-card></app-reservation-card>
     </div>
   </div>
-</nav>
-
-<div class="p-4 mt-10">
-    <div class="grid grid-cols-3 gap-4 text-center">
-       
-      <div class="bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-3xl font-bold text-teal-500">#</h2>
-        <p class="text-lg">commandes en cours</p>
-      </div>
-  
-      <div class="bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-3xl font-bold text-teal-500">#</h2>
-        <p class="text-lg">commandes traitées</p>
-      </div>
-  
-      <div class="bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-3xl font-bold text-teal-500">#</h2>
-        <p class="text-lg">commandes annulées</p>
-      </div>
-    </div>
-
-    <div class="p-6 mt-20">
-      <div class="flex space-x-8 text-gray-500 font-semibold border-b border-gray-300 pb-2">
-        <a href="#" class="text-teal-500">Tout</a>
-        <a href="#" class="hover:text-teal-500">En cours</a>
-        <a href="#" class="hover:text-teal-500">Traitee</a>
-        <a href="#" class="hover:text-teal-500">Terminee</a>
-      </div>
-      <div class="mt-8">
-        <ul class="space-y-4">
-        
-          <li class="bg-white p-6 rounded-lg shadow-md flex justify-between items-center">
-            <div>
-              <p><strong>Nombre de produits :</strong> #</p>
-              <p><strong>Date de la réservation :</strong>#</p>
-              <p><strong>Date de paiement :</strong>#</p>
-            </div>
-    <div>
-            <p class="text-xl font-semibold">Prix total: <span class="text-teal-500">#</span></p>
-          </div>
-        </li>
-  
-       
-        <li class="bg-white p-6 rounded-lg shadow-md flex justify-between items-center">
-          <div>
-            <p><strong>Nombre de produits :</strong> #</p>
-            <p><strong>Date de la réservation :</strong> #</p>
-            <p><strong>Date de paiement :</strong> #</p>
-          </div>
-          <div>
-            <p class="text-xl font-semibold">Prix total: <span class="text-teal-500">#</span></p>
-          </div>
-        </li>
-  
-        
-      </ul>
-    </div>
-  </div>
-  
+</div>

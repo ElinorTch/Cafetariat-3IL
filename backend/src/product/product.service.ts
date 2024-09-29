@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CategoryService } from 'src/category/category.service';
@@ -19,5 +19,11 @@ export class ProductService {
     const savedProduct = await product.save();
     this.categoryService.updateCategoryProduct(category, savedProduct);
     return savedProduct;
+  }
+
+  async getById(id: string): Promise<Product> {
+    const product = this.productModel.findById({ _id: id });
+    if (!product) throw new BadRequestException("This product doesn't exist.");
+    return product;
   }
 }

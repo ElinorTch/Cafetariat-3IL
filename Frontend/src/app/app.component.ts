@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 @Component({
   selector: 'app-root',

@@ -20,6 +20,6 @@ import {
 export class ReservationCardComponent {
   @Input() numberOfProducts!: number;
   @Input() reservationDate!: Date;
-  @Input() status: string = 'pending';
+  @Input() status!: string;
   @Input() price!: number;
 }

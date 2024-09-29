@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, InjectionToken, PLATFORM_ID } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { User } from './user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { StorageService } from '../../local/storage.service';
@@ -11,6 +11,7 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class AuthService {
   apiURL = 'http://localhost:3000/auth';
+  private user: any;
 
   constructor(
     private http: HttpClient,
@@ -47,6 +48,11 @@ export class AuthService {
     }
   }
 
+  getUser() {
+    console.log(this.user);
+    return this.user;
+  }
+
   public get loggedIn(): boolean {
     if (isPlatformBrowser(this.platformId)) {
       const token = this.storage.getItem('access_token');
@@ -58,5 +64,20 @@ export class AuthService {
 
   getToken(): string | null {
     return this.storage.getItem('access_token');
+  }
+
+  me(): Observable<any> {
+    return this.http.get(`${this.apiURL}/me`);
+  }
+
+  loadUser(): Observable<any> {
+    if (this.user) return of(this.user);
+
+    return this.me().pipe(
+      map((user: any) => {
+        this.user = user;
+        return user.user;
+      })
+    );
   }
 }

@@ -7,6 +7,9 @@ import { Reservation } from './reservation.entity';
 export type UserDocument = HydratedDocument<User>;
 @Schema({ timestamps: true })
 export class User extends BaseEntity {
+  @Prop({ required: false, unique: false })
+  fullName: string;
+
   @Prop({ required: true, unique: true })
   email: string;
 

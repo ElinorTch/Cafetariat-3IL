@@ -1,0 +1,54 @@
+<div
+  class="bg-white p-6 rounded-[15px] shadow-dashboard flex gap-5 justify-between items-center"
+>
+  <div class="p-1">
+    <ng-icon
+      *ngIf="status == 'pending'"
+      name="hugeBookmark01"
+      size="40"
+      class="text-charte-blue"
+    ></ng-icon>
+    <ng-icon
+      *ngIf="status == 'canceled'"
+      name="hugeBookmarkRemove01"
+      size="40"
+      class="text-red-500"
+    ></ng-icon>
+    <ng-icon
+      *ngIf="status == 'completed'"
+      name="hugeBookmarkCheck01"
+      size="40"
+      class="text-green-500"
+    ></ng-icon>
+  </div>
+  <div class="w-full flex flex-col">
+    <div>
+      <p>
+        <span class="font-medium">Nombre de produits :</span>
+        {{ numberOfProducts }}
+      </p>
+      <p>
+        <span class="font-medium">Date de la réservation :</span>
+        {{ reservationDate }}
+      </p>
+      <p>
+        <span class="font-medium">Statut de la reservation :</span>
+        <span *ngIf="status == 'canceled'" class="text-red-500 ml-1">{{
+          status
+        }}</span>
+        <span *ngIf="status == 'pending'" class="text-charte-blue ml-1">{{
+          status
+        }}</span>
+        <span *ngIf="status == 'completed'" class="text-green-500 ml-1">{{
+          status
+        }}</span>
+      </p>
+      <p class="font-medium">
+        Prix total:
+        <span class="text-charte-blue font-semibold text-[30px]"
+          >5{{ price }}</span
+        ><span class="font-light">euros</span>
+      </p>
+    </div>
+  </div>
+</div>

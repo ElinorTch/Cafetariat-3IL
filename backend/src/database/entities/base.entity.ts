@@ -6,6 +6,8 @@ export class BaseEntity {
 
   @Prop({ type: Types.ObjectId, auto: true })
   id: string;
+  
+  isDeleted: boolean;
 
   @Prop({ default: () => new Date(), immutable: true })
   readonly createdAt: Date;

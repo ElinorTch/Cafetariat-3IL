@@ -1,7 +1,8 @@
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { CategoryService } from 'src/category/category.service';
+import { CategorieDto } from 'src/database/dto/category.dto';
 import { ProductDto } from 'src/database/dto/product.dto';
 import { Product } from 'src/database/entities/product.entity';
 
@@ -28,11 +29,11 @@ export class ProductService {
     let update;
     if(product.category == category){
       update = await this.productModel.findByIdAndUpdate(productId, {
-        $set: {name: productDto.name, price: productDto.price}
+        $set: {name: productDto.name, price: productDto.price, isDeleted: productDto.isDeleted}
       })
     }else{
       update = await this.productModel.findByIdAndUpdate(productId, {
-        $set: {name: productDto.name, price: productDto.price, category: category}
+        $set: {name: productDto.name, price: productDto.price, category: category, isDeleted: productDto.isDeleted}
       })
       this.categoryService.updateCategoryProduct(category, product);
       this.categoryService.unlinkCategoryProduct(product.category, product);
@@ -45,5 +46,10 @@ export class ProductService {
     const product = this.productModel.findById(id);
     if (!product) throw new BadRequestException("This product doesn't exist.");
     return product;
+  }
+
+  async getAll(categoryDto: CategorieDto): Promise<Product[]>{
+    const products = await this.productModel.find({category: categoryDto._id});
+    return products;
   }
 }

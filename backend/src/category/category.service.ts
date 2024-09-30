@@ -42,7 +42,7 @@ export class CategoryService {
   async update(categoryDto: CategorieDto): Promise<Category>{
     const categoryId = new Types.ObjectId(categoryDto._id)
     const update = await this.categoryModel.findByIdAndUpdate(categoryId, {
-      $set: {name: categoryDto.name}
+      $set: {name: categoryDto.name, isDeleted: categoryDto.isDeleted}
     })
     return update;
   }

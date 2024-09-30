@@ -1,10 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { IsArray, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsOptional, IsString } from 'class-validator';
 
 export class CategorieDto {
   @IsString()
   @IsOptional()
     _id: string;
+
+  @IsBoolean()
+  isDeleted: boolean;
 
   @IsString()
   name: string;

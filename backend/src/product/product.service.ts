@@ -1,4 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model, Types } from 'mongoose';
+import { CategoryService } from 'src/category/category.service';
+import { ProductDto } from 'src/database/dto/product.dto';
+import { Product } from 'src/database/entities/product.entity';
 
 @Injectable()
-export class ProductService {}
+export class ProductService {
+  constructor(
+    @InjectModel(Product.name) private productModel: Model<Product>,
+    private categoryService: CategoryService,
+  ) {}
+
+  async create(productDto: ProductDto): Promise<Product> {
+    const product = new this.productModel(productDto);
+    const category = await this.categoryService.findById(productDto.category);
+    product.category = category;
+    const savedProduct = await product.save();
+    this.categoryService.updateCategoryProduct(category, savedProduct);
+    return savedProduct;
+  }
+
+  async update(productDto: ProductDto): Promise<Product> {
+    const productId = new Types.ObjectId(productDto._id)
+    const product = await this.getById(productDto._id);
+    const category = await this.categoryService.findById(productDto.category);
+    let update;
+    if(product.category == category){
+      update = await this.productModel.findByIdAndUpdate(productId, {
+        $set: {name: productDto.name, price: productDto.price}
+      })
+    }else{
+      update = await this.productModel.findByIdAndUpdate(productId, {
+        $set: {name: productDto.name, price: productDto.price, category: category}
+      })
+      this.categoryService.updateCategoryProduct(category, product);
+      this.categoryService.unlinkCategoryProduct(product.category, product);
+    }
+    return update;
+
+  }
+
+  async getById(id: string): Promise<Product> {
+    const product = this.productModel.findById(id);
+    if (!product) throw new BadRequestException("This product doesn't exist.");
+    return product;
+  }
+}

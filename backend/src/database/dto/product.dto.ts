@@ -5,7 +5,7 @@ export class ProductDto {
   name: string;
 
   @IsNumber()
-  price: string;
+  price: number;
 
   @IsString()
   categoryId: string;

@@ -4,7 +4,6 @@ import { Product, ProductSchema } from 'src/database/entities/product.entity';
 import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
 import { CategoryModule } from 'src/category/category.module';
-import { CategoryService } from 'src/category/category.service';
 import {
   Category,
   CategorySchema,

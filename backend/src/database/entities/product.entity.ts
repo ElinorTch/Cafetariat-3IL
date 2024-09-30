@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument, Types } from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
 import { Category } from './category.entity';
 import { BaseEntity } from './base.entity';
 import { ReservationItem } from './reservationItem.entity';

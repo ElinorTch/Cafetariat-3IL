@@ -95,4 +95,12 @@ export class AuthService {
     if (!user) throw new BadRequestException("This user doesn't exist.");
     return user;
   }
+
+  async update(userDto: UserDto): Promise<User>{
+    const user = this.getByEMail(userDto.email);
+    const update = await this.userModel.findByIdAndUpdate((await user)._id, {
+      $set: {email: userDto.email, password: userDto.password}
+    })
+    return update;
+  }
 }

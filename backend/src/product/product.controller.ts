@@ -23,3 +23,4 @@ export class ProductController {
     return this.productsService.getAll(categoryDto);
   }
 }
+

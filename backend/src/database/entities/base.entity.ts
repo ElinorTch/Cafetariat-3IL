@@ -2,8 +2,6 @@ import { Prop } from '@nestjs/mongoose';
 import { Types } from 'mongoose';
 
 export class BaseEntity {
-  _id: string;
-
   @Prop({ type: Types.ObjectId, auto: true })
   id: string;
 

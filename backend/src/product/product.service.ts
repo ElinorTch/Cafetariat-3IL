@@ -23,7 +23,7 @@ export class ProductService {
 
   async update(productDto: ProductDto): Promise<Product> {
     const productId = new Types.ObjectId(productDto._id)
-    const product = await this.findById(productDto._id);
+    const product = await this.getById(productDto._id);
     const category = await this.categoryService.findById(productDto.category);
     let update;
     if(product.category == category){
@@ -41,7 +41,7 @@ export class ProductService {
 
   }
 
-  async findById(id: string): Promise<Product> {
+  async getById(id: string): Promise<Product> {
     const product = this.productModel.findById(id);
     if (!product) throw new BadRequestException("This product doesn't exist.");
     return product;

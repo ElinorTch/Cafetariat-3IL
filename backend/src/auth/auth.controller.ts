@@ -31,7 +31,7 @@ export class AuthController {
 
   @Get('me')
   me(@Request() req: any) {
-    return req.user;
+    return this.usersService.me(req);
   }
 
   @Get()

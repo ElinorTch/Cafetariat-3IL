@@ -1,0 +1,38 @@
+<nav
+  class="w-full h-16 bg-white shadow-dashboard px-10 md:px-20 flex justify-between items-center"
+>
+  <div class="flex items-center gap-10">
+    <img src="assets/logo.png" alt="Logo" class="h-10 w-12" />
+    <div class="items-center gap-10 hidden sm:flex">
+      <div
+        *ngIf="user.role == 'admin'"
+        class="flex items-center gap-2 cursor-pointer font-light"
+        routerLink="dashboard"
+        routerLinkActive="text-charte-blue"
+      >
+        <ng-icon name="hugeClipboard"></ng-icon>
+        <a href="#" class="text-lg hover:underline nav-link">Dashboard</a>
+      </div>
+      <div
+        class="flex items-center gap-2 cursor-pointer font-light"
+        routerLink="product"
+        routerLinkActive="text-charte-blue"
+      >
+        <ng-icon name="hugeProductLoading"></ng-icon>
+        <a
+          href="@"
+          routerLink="products"
+          routerLinkActive="text-charte-blue"
+          class="hover:text-teal-500 font-light nav-link"
+          >All products</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="h-10 w-10 rounded-full font-light cursor-pointer text-[20px] text-white bg-charte-blue flex justify-center items-center shadow-dashboard"
+  >
+    {{ user.email.charAt(0).toUpperCase() }}
+  </div>
+</nav>

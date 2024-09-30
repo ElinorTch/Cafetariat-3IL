@@ -1,16 +1,13 @@
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class ProductDto {
+export class ReservationItemDto {
   @IsString()
   @IsOptional()
-    _id: string;
-
-  @IsString()
-  name: string;
+  productId: string;
 
   @IsNumber()
-  price: number;
+  quantity: number;
 
   @IsString()
-  category: string;
+  status: string;
 }

@@ -1,0 +1,60 @@
+<div
+  class="bg-white p-6 rounded-[15px] shadow-dashboard flex gap-5 justify-between items-center"
+>
+  <div class="p-1">
+    <ng-icon
+      *ngIf="status == 'pending'"
+      name="hugeBookmark01"
+      size="40"
+      class="text-charte-blue"
+    ></ng-icon>
+    <ng-icon
+      *ngIf="status == 'canceled'"
+      name="hugeBookmarkRemove01"
+      size="40"
+      class="text-red-500"
+    ></ng-icon>
+    <ng-icon
+      *ngIf="status == 'completed'"
+      name="hugeBookmarkCheck01"
+      size="40"
+      class="text-green-600"
+    ></ng-icon>
+  </div>
+  <div class="w-full flex flex-col">
+    <div>
+      <p>
+        <span class="font-medium">Produits :</span>
+        <span
+          [ngClass]="{'text-red-500': status == 'canceled', 'text-charte-blue': status == 'pending','text-green-600': status == 'completed',}"
+          class="ml-1"
+          >{{ numberOfProducts }}</span
+        >
+      </p>
+      <p>
+        <span class="font-medium">Date :</span>
+        <span
+          [ngClass]="{'text-red-500': status == 'canceled', 'text-charte-blue': status == 'pending','text-green-600': status == 'completed',}"
+          class="ml-1"
+          >{{ reservationDate | date }}</span
+        >
+      </p>
+      <p>
+        <span class="font-medium">Statut :</span>
+        <span
+          [ngClass]="{'text-red-500': status == 'canceled', 'text-charte-blue': status == 'pending','text-green-600': status == 'completed',}"
+          class="ml-1"
+          >{{ status }}</span
+        >
+      </p>
+      <p class="font-medium">
+        Prix total:
+        <span
+          [ngClass]="{'text-red-500': status == 'canceled', 'text-charte-blue': status == 'pending','text-green-600': status == 'completed',}"
+          class="font-semibold text-[30px]"
+          >{{ price }}</span
+        ><span class="font-light">euros</span>
+      </p>
+    </div>
+  </div>
+</div>

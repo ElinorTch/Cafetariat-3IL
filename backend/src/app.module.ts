@@ -5,8 +5,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
 import { CategoryModule } from './category/category.module';
-import { ReservationModule } from './reservation/reservation.module';
-import { ReservationItemModule } from './reservation-item/reservation-item.module';
 
 @Module({
   imports: [
@@ -14,8 +12,6 @@ import { ReservationItemModule } from './reservation-item/reservation-item.modul
     AuthModule,
     ProductModule,
     CategoryModule,
-    ReservationModule,
-    ReservationItemModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -23,23 +23,31 @@ export class ProductService {
   }
 
   async update(productDto: ProductDto): Promise<Product> {
-    const productId = new Types.ObjectId(productDto._id)
+    const productId = new Types.ObjectId(productDto._id);
     const product = await this.getById(productDto._id);
     const category = await this.categoryService.findById(productDto.category);
     let update;
-    if(product.category == category){
+    if (product.category == category) {
       update = await this.productModel.findByIdAndUpdate(productId, {
-        $set: {name: productDto.name, price: productDto.price, isDeleted: productDto.isDeleted}
-      })
-    }else{
+        $set: {
+          name: productDto.name,
+          price: productDto.price,
+          isDeleted: productDto.isDeleted,
+        },
+      });
+    } else {
       update = await this.productModel.findByIdAndUpdate(productId, {
-        $set: {name: productDto.name, price: productDto.price, category: category, isDeleted: productDto.isDeleted}
-      })
+        $set: {
+          name: productDto.name,
+          price: productDto.price,
+          category: category,
+          isDeleted: productDto.isDeleted,
+        },
+      });
       this.categoryService.updateCategoryProduct(category, product);
       this.categoryService.unlinkCategoryProduct(product.category, product);
     }
     return update;
-
   }
 
   async getById(id: string): Promise<Product> {
@@ -48,8 +56,10 @@ export class ProductService {
     return product;
   }
 
-  async getAll(categoryDto: CategorieDto): Promise<Product[]>{
-    const products = await this.productModel.find({category: categoryDto._id});
+  async getAllByCategory(categoryDto: CategorieDto): Promise<Product[]> {
+    const products = await this.productModel.find({
+      category: categoryDto._id,
+    });
     return products;
   }
 }

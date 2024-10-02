@@ -1,0 +1,52 @@
+<div
+  class="w-full h-full bg-white rounded-[15px] flex items-center gap-2 px-10 py-4"
+>
+  <div class="p-1">
+    <ng-icon
+      *ngIf="reservation.status == 'pending'"
+      name="hugeBookmark01"
+      size="40"
+      class="text-charte-blue"
+    ></ng-icon>
+    <ng-icon
+      *ngIf="reservation.status == 'canceled'"
+      name="hugeBookmarkRemove01"
+      size="40"
+      class="text-red-500"
+    ></ng-icon>
+    <ng-icon
+      *ngIf="reservation.status == 'completed'"
+      name="hugeBookmarkCheck01"
+      size="40"
+      class="text-green-600"
+    ></ng-icon>
+  </div>
+  <div class="flex flex-col gap-2">
+    <div>
+      <span class="font-semibold">Les produits</span>: @for (product of
+      products; track $index) { @if (products.length < $index - 1) {
+      {{ product.name }}, } @else { {{ product.name }}. }}
+      <span *ngFor="let product of products"></span>
+    </div>
+
+    <div>
+      <span class="font-semibold">Date de la reservation</span>:
+      {{ reservation.createdAt | date }}
+    </div>
+    <div><span class="font-semibold">Price</span>: {{ getTotal() }} euros</div>
+    <form [formGroup]="form" class="flex gap-2 items-center">
+      <label for="status" class="font-semibold">Status:</label>
+      <select
+        id="status"
+        formControlName="status"
+        (change)="updateStatus($event)"
+        [ngClass]="{'bg-red-500': reservation.status == 'canceled', 'bg-blue-500 text-black': reservation.status == 'pending','bg-green-600':   reservation.status == 'completed',}"
+        class="bg-gray-50 text-white border border-gray-300 text-sm rounded-lg px-5 py-2"
+      >
+        <option value="pending" class="bg-white text-black">Pending</option>
+        <option value="completed" class="bg-white text-black">Completed</option>
+        <option value="canceled" class="bg-white text-black">Canceled</option>
+      </select>
+    </form>
+  </div>
+</div>

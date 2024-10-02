@@ -1,5 +1,5 @@
 <div
-  class="bg-white p-6 rounded-[15px] shadow-dashboard flex gap-5 justify-between items-center"
+  class="bg-white p-6 rounded-[15px] shadow-dashboard flex gap-5 justify-between items-center hover:shadow-xl cursor-pointer transition"
 >
   <div class="p-1">
     <ng-icon
@@ -51,7 +51,7 @@
         Prix total:
         <span
           [ngClass]="{'text-red-500': status == 'canceled', 'text-charte-blue': status == 'pending','text-green-600': status == 'completed',}"
-          class="font-semibold text-[30px]"
+          class="font-semibold"
           >{{ price }}</span
         ><span class="font-light">euros</span>
       </p>

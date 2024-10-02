@@ -21,6 +21,7 @@ export class ReservationItemService {
     const product = await this.productService.getById(
       reservationItemDto.productId,
     );
+    reservationItem.products = product;
     reservationItem.total = product.price * reservationItem.quantity;
     // product.category = category; // Utilser les produits plutot
     const savedItem = await reservationItem.save();
@@ -32,5 +33,12 @@ export class ReservationItemService {
     [key: string]: string;
   }): Promise<ReservationItem[]> {
     return this.reservationItemModel.find();
+  }
+
+  async getById(id: string): Promise<ReservationItem> {
+    return this.reservationItemModel
+      .findById({ _id: id })
+      .populate('products')
+      .exec();
   }
 }

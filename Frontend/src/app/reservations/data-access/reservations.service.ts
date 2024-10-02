@@ -15,4 +15,15 @@ export class ReservationsService {
       : {};
     return this.http.get(`${this.api_URL}/reservations`, options);
   }
+
+  updateSatus(id: string, filter?: string) {
+    const options = filter
+      ? { params: new HttpParams().set('status', filter) }
+      : {};
+    return this.http.post(`${this.api_URL}/reservations/${id}`, {}, options);
+  }
+
+  getReservationItem(id: string) {
+    return this.http.get(`${this.api_URL}/reservationsItem/${id}`);
+  }
 }

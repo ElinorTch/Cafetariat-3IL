@@ -50,9 +50,10 @@
       <app-reservation-card
         *ngFor="let reservation of reservations"
         [numberOfProducts]="reservation.reservationItem.length"
-        [price]="getTotalPrice(reservation)"
+        [price]="getTotalOfPrice(reservation)"
         [status]="reservation.status"
         [reservationDate]="reservation.createdAt"
+        (click)="openDialog(reservation)"
       ></app-reservation-card>
     </div>
   </div>

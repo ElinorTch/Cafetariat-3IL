@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { DashboardCardComponent } from '../../shared/components/dashboard-card/dashboard-card.component';
 import { RouterModule } from '@angular/router';
 import { ReservationCardComponent } from '../../shared/components/reservation-card/reservation-card.component';
-import { ReservationsService } from '../reservations.service';
+import { ReservationsService } from '../../reservations/data-access/reservations.service';
 import { CommonModule } from '@angular/common';
+import { Dialog, DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
+import { ReservationDetailsComponent } from '../../reservations/reservation-details/reservation-details.component';
+import { getTotalPrice } from '../../utils/price';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +25,7 @@ export class DashboardComponent implements OnInit {
   pendingReservations: number = 0;
   completedReservations: number = 0;
   canceledReservations: number = 0;
+  dialog = inject(Dialog);
 
   constructor(private reservationService: ReservationsService) {}
 
@@ -50,10 +54,16 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  getTotalPrice(reservation: any) {
-    let total = 0;
-    for (const reservationItem of reservation.reservationItem)
-      total += reservationItem.total;
-    return total;
+  getTotalOfPrice(reservation: any) {
+    return getTotalPrice(reservation);
+  }
+
+  openDialog(reservation: any) {
+    this.dialog.open(ReservationDetailsComponent, {
+      minWidth: '300px',
+      data: {
+        reservation,
+      },
+    });
   }
 }

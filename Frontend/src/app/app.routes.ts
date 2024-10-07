@@ -8,6 +8,7 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
 import { noAuthGuard } from './auth/data-access/no-auth.guard';
 import { appResolver } from './app.resolver';
 import { roleGuard } from './auth/data-access/role.guard';
+import { HomePageComponent } from './home-page/home-page.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,10 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
+      },
+      {
+        path: 'home',
+        component: HomePageComponent,
       },
     ],
   },

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable, InjectionToken, PLATFORM_ID } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { User } from './user';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -49,7 +49,6 @@ export class AuthService {
   }
 
   getUser() {
-    console.log(this.user);
     return this.user;
   }
 

@@ -1,60 +1,64 @@
-<div class="mt-10 flex flex-col gap-10 max-w-[1032px]">
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
-    <app-dashboard-card
-      class="text-charte-blue"
-      [value]="pendingReservations"
-      description="Commandes en cours"
-    ></app-dashboard-card>
-    <app-dashboard-card
-      class="text-green-600"
-      [value]="completedReservations"
-      description="Commandes traitées"
-    ></app-dashboard-card>
-    <app-dashboard-card
-      class="text-red-500"
-      [value]="canceledReservations"
-      description="Commandes annulées"
-    ></app-dashboard-card>
-  </div>
-
-  <div class="flex flex-col gap-5">
+<div class="w-full flex justify-center items-center">
+  <div class="mt-10 flex flex-col gap-10 max-w-[1032px]">
     <div
-      class="flex gap-5 sm:gap-10 text-gray-500 font-medium border-b border-gray-300 pb-2"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center"
     >
-      <a
-        [ngClass]="{ 'text-charte-blue': selected == 'tout' }"
-        class="cursor-pointer"
-        (click)="getReservations()"
-        >Tout</a
-      >
-      <a
-        [ngClass]="{ 'text-charte-blue': selected == 'pending' }"
-        class="hover:text-charte-blue cursor-pointer"
-        (click)="getReservations('pending')"
-        >En cours</a
-      >
-      <a
-        [ngClass]="{ 'text-green-600': selected == 'completed' }"
-        class="hover:text-green-600 cursor-pointer"
-        (click)="getReservations('completed')"
-        >Traitee</a
-      >
-      <a
-        [ngClass]="{ 'text-red-500': selected == 'canceled' }"
-        class="hover:text-red-500 cursor-pointer"
-        (click)="getReservations('canceled')"
-        >Canceled</a
-      >
+      <app-dashboard-card
+        class="text-charte-blue"
+        [value]="pendingReservations"
+        description="Commandes en cours"
+      ></app-dashboard-card>
+      <app-dashboard-card
+        class="text-green-600"
+        [value]="completedReservations"
+        description="Commandes traitées"
+      ></app-dashboard-card>
+      <app-dashboard-card
+        class="text-red-500"
+        [value]="canceledReservations"
+        description="Commandes annulées"
+      ></app-dashboard-card>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-5">
-      <app-reservation-card
-        *ngFor="let reservation of reservations"
-        [numberOfProducts]="reservation.reservationItem.length"
-        [price]="getTotalOfPrice(reservation)"
-        [status]="reservation.status"
-        [reservationDate]="reservation.createdAt"
-        (click)="openDialog(reservation)"
-      ></app-reservation-card>
+
+    <div class="flex flex-col gap-5">
+      <div
+        class="flex gap-5 sm:gap-10 text-gray-500 font-medium border-b border-gray-300 pb-2"
+      >
+        <a
+          [ngClass]="{ 'text-charte-blue': selected == 'tout' }"
+          class="cursor-pointer"
+          (click)="getReservations()"
+          >Tout</a
+        >
+        <a
+          [ngClass]="{ 'text-charte-blue': selected == 'pending' }"
+          class="hover:text-charte-blue cursor-pointer"
+          (click)="getReservations('pending')"
+          >En cours</a
+        >
+        <a
+          [ngClass]="{ 'text-green-600': selected == 'completed' }"
+          class="hover:text-green-600 cursor-pointer"
+          (click)="getReservations('completed')"
+          >Traitee</a
+        >
+        <a
+          [ngClass]="{ 'text-red-500': selected == 'canceled' }"
+          class="hover:text-red-500 cursor-pointer"
+          (click)="getReservations('canceled')"
+          >Canceled</a
+        >
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
+        <app-reservation-card
+          *ngFor="let reservation of reservations"
+          [numberOfProducts]="reservation.reservationItem.length"
+          [price]="getTotalOfPrice(reservation)"
+          [status]="reservation.status"
+          [reservationDate]="reservation.createdAt"
+          (click)="openDialog(reservation)"
+        ></app-reservation-card>
+      </div>
     </div>
   </div>
 </div>

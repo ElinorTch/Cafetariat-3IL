@@ -15,6 +15,9 @@ export class Product extends BaseEntity {
   @Prop({ required: true })
   price: number;
 
+  @Prop({ required: true })
+  day: string;
+
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Category' })
   category: Category;
 

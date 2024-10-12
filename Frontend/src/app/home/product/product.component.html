@@ -1,5 +1,5 @@
 <div class="flex h-full w-full">
-  <div class="w-full pr-5">
+  <div class="w-full pr-5 overflow-y-auto">
     <h1 class="text-3xl font-bold flex justify-center mt-4">Etape 2 :</h1>
     <hr class="m-6" />
     <div class="vaguelette flex justify-center relative text-xl font-bold">
@@ -21,19 +21,22 @@
       <span class="relative" style="--i: 33">s :</span>
     </div>
     <hr class="m-6" />
-    <!-- Requête à la BDD -->
-    <div class="grid grid-cols-5 gap-4">
-      <div class="bg-white shadow-md rounded-lg p-4">Item 1</div>
-      <div class="bg-white shadow-md rounded-lg p-4">Item 2</div>
-      <div class="bg-white shadow-md rounded-lg p-4">Item 3</div>
-      <div class="bg-white shadow-md rounded-lg p-4">Item 4</div>
-      <div class="bg-white shadow-md rounded-lg p-4">Item 5</div>
-      <div class="bg-white shadow-md rounded-lg p-4">Item 1</div>
-      <div class="bg-white shadow-md rounded-lg p-4">Item 2</div>
-      <div class="bg-white shadow-md rounded-lg p-4">Item 3</div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      <app-product-card [link]="'assets/products/food.jpg'"></app-product-card>
+      <app-product-card
+        [link]="'assets/products/product.jpg'"
+      ></app-product-card>
+      <app-product-card [link]="'assets/products/food.jpg'"></app-product-card>
+      <app-product-card
+        [link]="'assets/products/product.jpg'"
+      ></app-product-card>
+      <app-product-card [link]="'assets/products/food.jpg'"></app-product-card>
+      <app-product-card
+        [link]="'assets/products/product.jpg'"
+      ></app-product-card>
     </div>
   </div>
-  <div class="min-w-[500px] h-full">
+  <div class="min-w-[350px] h-full hidden">
     <app-basket></app-basket>
   </div>
 </div>

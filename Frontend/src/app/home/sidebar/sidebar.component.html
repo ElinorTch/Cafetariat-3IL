@@ -1,5 +1,5 @@
 <div
-  class="h-full w-[400px] bg-[#0692a2] text-white p-4 justify-center font-bold"
+  class="h-full w-full md:w-[400px] bg-[#0692a2] text-white p-4 justify-center font-bold overflow-y-auto"
 >
   <h1 class="text-3xl flex justify-center mt-4">Etape 1 :</h1>
   <hr class="m-6" />
@@ -24,23 +24,17 @@
   </div>
   <hr class="m-6" />
   <div class="flex items-center justify-center">
-    <!-- Faut automatiser les jours + afficher les dates-->
-    <div class="flex flex-col gap-5 w-[200px]">
-      <div class="bg-[#e2dfd3] text-black p-4 rounded-md flex justify-center">
-        Lundi
+    <div class="flex flex-col gap-5 w-[240px]">
+      @for (day of semaine; track $index) { @if (day.getDay() != 0 &&
+      day.getDay() != 6) {
+      <div
+        class="bg-[#e2dfd3] text-black p-4 rounded-md flex justify-center cursor-pointer hover:shadow-xl"
+        routerLink="{{ day.getDay() }}"
+        routerLinkActive="bg-white"
+      >
+        {{ day | date : "EEEE, MMMM d" }}
       </div>
-      <div class="bg-[#e2dfd3] text-black p-4 rounded-md flex justify-center">
-        Jour 2
-      </div>
-      <div class="bg-[#e2dfd3] text-black p-4 rounded-md flex justify-center">
-        Jour 3
-      </div>
-      <div class="bg-[#e2dfd3] text-black p-4 rounded-md flex justify-center">
-        Jour 4
-      </div>
-      <div class="bg-[#e2dfd3] text-black p-4 rounded-md flex justify-center">
-        Jour 5
-      </div>
+      } }
     </div>
   </div>
 </div>

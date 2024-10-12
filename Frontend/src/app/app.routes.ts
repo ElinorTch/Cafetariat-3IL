@@ -29,7 +29,7 @@ export const routes: Routes = [
         component: HomeLayoutComponent,
         children: [
           {
-            path: 'day',
+            path: ':day',
             component: ProductComponent,
           },
         ],

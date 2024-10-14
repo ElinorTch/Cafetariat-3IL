@@ -21,6 +21,9 @@ export class Product extends BaseEntity {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Category' })
   category: Category;
 
+  @Prop({required: false })
+  imagePath: string;
+
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ReservationItem' }],
   })

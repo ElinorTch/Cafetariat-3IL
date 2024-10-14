@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { Dialog, DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
 import { ReservationDetailsComponent } from '../../reservations/reservation-details/reservation-details.component';
 import { getTotalPrice } from '../../utils/price';
+import { CategoryDropdownComponent } from '../../shared/components/category-dropdown/category-dropdown.component';
 
 @Component({
   selector: 'app-dashboard',

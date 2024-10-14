@@ -16,4 +16,7 @@ export class ProductDto {
 
   @IsString()
   category: string;
+
+  @IsString()
+  imagePath: string;
 }

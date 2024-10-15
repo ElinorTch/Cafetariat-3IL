@@ -18,12 +18,12 @@ export class ProductController {
     return this.productsService.update(productDto);
   }
 
-  // @Get('')
-  // async getAllByCategory(
-  //   @Body() categoryDto: CategorieDto,
-  // ): Promise<Product[]> {
-  //   return this.productsService.getAllByCategory(categoryDto);
-  // }
+  @Get('')
+  async getAllByCategory(
+    @Body() categoryDto: CategorieDto,
+  ): Promise<Product[]> {
+    return this.productsService.getAllByCategory(categoryDto);
+  }
 
   @Get(':id')
   async getById(@Param('id') id: string): Promise<Product> {

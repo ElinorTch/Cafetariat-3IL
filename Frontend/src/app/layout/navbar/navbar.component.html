@@ -19,10 +19,14 @@
   </div>
 
   <!-- <p class="text-[25px] font-semibold uppercase">La cafetariat des guerriers</p> -->
-
-  <div
-    class="h-10 w-10 rounded-full font-light cursor-pointer text-[20px] text-white bg-charte-blue flex justify-center items-center shadow-dashboard"
-  >
-    {{ user.email.charAt(0).toUpperCase() }}
+  <div class="flex justify-center items-center">
+    <button *ngIf="showButton" class="bg-charte-blue text-white px-4 py-2 rounded flex justify-center rounded h-10 w-20 mx-10">
+      Panier
+    </button>
+    <div
+      class="h-10 w-10 rounded-full font-light cursor-pointer text-[20px] text-white bg-charte-blue flex justify-center items-center shadow-dashboard"
+    >
+      {{ user.email.charAt(0).toUpperCase() }}
+    </div>
   </div>
 </nav>

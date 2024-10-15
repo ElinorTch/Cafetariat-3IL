@@ -13,6 +13,7 @@ export class CategoryDropdownComponent{
   @Input() name!: string;
   @Input() isDeleted!: boolean;
   @Input() products!: any[];
+  @Input() day!: number;
 
   isOpen = false;
 

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonEngine } from '@angular/ssr';
 
 @Component({
@@ -9,9 +9,15 @@ import { CommonEngine } from '@angular/ssr';
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
 })
-export class ProductCardComponent {
+export class ProductCardComponent{
   @Input() imagePath!: string;
   @Input() name!: string;
   @Input() price!: string;
   @Input() isDeleted!: boolean;
+  @Input() disponibilityDays!: number[];
+  @Input() day!: number;
+
+  getDay(){
+    return Number(this.day)
+  }
 }

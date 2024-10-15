@@ -28,6 +28,9 @@ export class Product extends BaseEntity {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ReservationItem' }],
   })
   reservationItem: ReservationItem[];
+
+  @Prop({required: false})
+  disponibilityDays: number[];
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);

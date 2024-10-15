@@ -15,7 +15,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './product.component.scss',
 })
 export class ProductComponent implements OnInit{
+  _day!: number;
   @Input() set day(day: number) {
+    this._day = day;
     console.log(day);
   }
   categories: any = [];

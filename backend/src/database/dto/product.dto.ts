@@ -1,4 +1,4 @@
-import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class ProductDto {
   @IsString()
@@ -16,4 +16,11 @@ export class ProductDto {
 
   @IsString()
   category: string;
+
+  @IsString()
+  imagePath: string;
+
+  @IsArray()
+  @IsString({each: true})
+  disponibilityDays: number[];
 }

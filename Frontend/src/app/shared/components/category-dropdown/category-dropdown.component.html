@@ -1,0 +1,31 @@
+<div *ngIf="!isDeleted" class="w-full relative p-1">
+    <!-- Le bouton qui déclenche le dropdown -->
+    <button (click)="toggleDropdown()" 
+      class="w-full text-left px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center">
+      {{ name }}
+      <!-- Flèche avec rotation animée -->
+      <svg [ngClass]="{'rotate-180': isOpen}" class="ml-2 h-5 w-5 transition-transform duration-500 transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </button>
+  
+    <!-- Le menu dropdown avec une grille -->
+    <div 
+      class="w-full mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10 transition-all duration-500"
+      [ngClass]="{'max-h-0 opacity-0': !isOpen, 'max-h-screen opacity-100': isOpen}"
+      style="overflow: hidden; transition: max-height 0.5s ease;">
+  
+      <!-- Grille avec 1, 2, ou 3 colonnes selon la taille de l'écran -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-4">
+        <app-product-card
+          *ngFor="let product of products"
+          [name]="product.name"
+          [price]="product.price"
+          [imagePath]="product.imagePath"
+          [isDeleted]="product.isDeleted"
+          [disponibilityDays]="product.disponibilityDays"
+          [day] = "day"></app-product-card>
+      </div>
+    </div>
+  </div>
+  

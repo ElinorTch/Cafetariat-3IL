@@ -1,7 +1,5 @@
-<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center h-full w-full" *ngIf="showBasket">
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center h-full w-full z-50" *ngIf="showBasket">
   <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-    <button (click)="closeBasket()" class="bg-red-500 text-white px-4 py-2 rounded">Fermer</button>
-    <!--
     <div class="h-full p-4 bg-white shadow-2xl rounded-lg overflow-y-auto flex flex-col">
       <h1 class="text-3xl font-bold flex justify-center mt-4">Etape 3 :</h1>
       <hr class="m-6" />
@@ -33,7 +31,7 @@
         <span class="relative" style="--i: 45">e :</span>
       </div>
       <hr class="m-6" />
-      Liste des items sélectionnés
+      <!-- Liste des items sélectionnés -->
       <div class="flex-1 w-full space-y-4">
         <div class="flex justify-between items-center bg-[#e2dfd3] p-3 rounded-md">
           <span>Article 1</span>
@@ -70,12 +68,13 @@
           </svg>
         </div>
       </div>
-      Bouton à config
-      <div class="flex justify-center">
-        <button class="w-3/4 bg-[#0692a2] text-white py-2 px-4 rounded-md mt-4">
+      <div class="flex justify-center mt-2">
+        <!-- Bonton à config -->
+        <button class="w-3/4 bg-[#0692a2] text-white py-2 px-4 rounded-md m-2">
           Valider la commande
         </button>
+        <button (click)="closeBasket()" class="bg-red-500 text-white py-2 px-4 rounded-md m-2">Fermer</button>
       </div>
-    </div> -->
+    </div>
   </div>
 </div>

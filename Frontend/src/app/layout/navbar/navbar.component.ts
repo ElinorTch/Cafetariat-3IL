@@ -5,11 +5,12 @@ import { hugeClipboard, hugeProductLoading } from '@ng-icons/huge-icons';
 import { AuthService } from '../../auth/data-access/auth.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { BasketComponent } from '../../home/basket/basket.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterModule, NgIconComponent],
+  imports: [CommonModule, RouterModule, NgIconComponent, BasketComponent],
   viewProviders: [
     provideIcons({
       hugeClipboard,
@@ -22,6 +23,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent{
   user: any;
   showButton: boolean = false;
+  showBasket: boolean = false;
 
   constructor(private auth: AuthService, private router : Router) {}
 
@@ -36,5 +38,9 @@ export class NavbarComponent{
     this.auth.loadUser().subscribe((data) => {
       this.user = data;
     });
+  }
+
+  toggleBasket(): void {
+    this.showBasket = !this.showBasket;
   }
 }

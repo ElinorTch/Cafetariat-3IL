@@ -8,7 +8,6 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
 import { noAuthGuard } from './auth/data-access/no-auth.guard';
 import { appResolver } from './app.resolver';
 import { roleGuard } from './auth/data-access/role.guard';
-import { HomePageComponent } from './home/home-page/home-page.component';
 import { HomeLayoutComponent } from './home/home-layout/home-layout.component';
 import { ProductComponent } from './home/product/product.component';
 

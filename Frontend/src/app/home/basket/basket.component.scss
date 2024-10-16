@@ -1,0 +1,17 @@
+.vaguelette span {
+    animation: animate 2s ease-in-out infinite;
+    animation-delay: calc(0.05s * var(--i));
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(0px);
+    }
+    20% {
+        transform: translateY(-8px);
+    }
+    40%,
+    100% {
+        transform: translateY(0px);
+    }
+}

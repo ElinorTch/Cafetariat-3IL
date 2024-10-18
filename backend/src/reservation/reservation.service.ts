@@ -7,18 +7,23 @@ import { ReservationDto } from 'src/database/dto/reservation.dto';
 import { Reservation } from 'src/database/entities/reservation.entity';
 import { User } from 'src/database/entities/user.entity';
 import { Status } from 'src/database/enum/status';
+import { ReservationItemService } from 'src/reservation-item/reservation-item.service';
 
 @Injectable()
 export class ReservationService {
   constructor(
     @InjectModel(Reservation.name) private reservationModel: Model<Reservation>,
     private auth: AuthService,
+    private reservationItemService: ReservationItemService,
   ) {}
 
   async create(reservationDto: ReservationDto) {
     const reservation = new this.reservationModel(reservationDto);
     const user = await this.auth.getById(reservationDto.userId);
     reservation.user = user;
+    for (const item of reservationDto.reservationItem) {
+      this.reservationItemService.updateStatus(item._id);
+    }
     return reservation.save();
   }
 

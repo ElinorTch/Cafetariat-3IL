@@ -4,6 +4,7 @@ import { Product } from './product.entity';
 import { BaseEntity } from './base.entity';
 import { Reservation } from './reservation.entity';
 import { Status } from '../enum/status';
+import { User } from './user.entity';
 
 export type ReservationItemDocument = HydratedDocument<ReservationItem>;
 
@@ -23,6 +24,9 @@ export class ReservationItem extends BaseEntity {
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Product' })
   products: Product;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  user: User;
 }
 
 export const ReservationItemSchema =

@@ -20,4 +20,8 @@ export class CategoryDropdownComponent{
   toggleDropdown() {
     this.isOpen = !this.isOpen;
   }
+
+  getDay(){
+    return Number(this.day);
+  }
 }

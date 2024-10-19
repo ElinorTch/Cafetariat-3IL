@@ -17,14 +17,17 @@
   
       <!-- Grille avec 1, 2, ou 3 colonnes selon la taille de l'écran -->
       <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-4">
-        <app-product-card
-          *ngFor="let product of products"
-          [name]="product.name"
-          [price]="product.price"
-          [imagePath]="product.imagePath"
-          [isDeleted]="product.isDeleted"
-          [disponibilityDays]="product.disponibilityDays"
-          [day] = "day"></app-product-card>
+        <div *ngFor="let product of products">
+          <app-product-card
+            *ngIf="!product.isDeleted && product.disponibilityDays.includes(getDay())"
+            [name]="product.name"
+            [price]="product.price"
+            [imagePath]="product.imagePath"
+            [isDeleted]="product.isDeleted"
+            [disponibilityDays]="product.disponibilityDays"
+            [day] = "day"
+          ></app-product-card>
+        </div>
       </div>
     </div>
   </div>

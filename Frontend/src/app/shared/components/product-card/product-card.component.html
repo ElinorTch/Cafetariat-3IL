@@ -1,4 +1,7 @@
-<div class="h-[370px] w-full flex flex-col gap-2 p-4 rounded-[15px] bg-white">
+<div
+  *ngIf="!isDeleted && disponibilityDays.includes(getDay())"
+  class="h-[370px] w-full flex flex-col gap-2 p-4 rounded-[15px] bg-white"
+>
   <div class="h-full w-full">
     <img
     *ngIf="imagePath != null"
@@ -14,12 +17,12 @@
     />
   </div>
   <div class="w-full h-full flex justify-between">
-    <p>{{name}}</p>
-    <p>{{price}}</p>
-    
+    <p>{{ product.name }}</p>
+    <p>{{ product.price }}</p>
   </div>
   <div
     class="w-full h-full flex justify-between bg-charte-blue rounded-[15px] cursor-pointer text-white p-2"
+    (click)="addItem(product)"
   >
     Ajouter au panier
   </div>

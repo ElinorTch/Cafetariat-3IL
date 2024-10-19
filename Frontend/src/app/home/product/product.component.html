@@ -21,16 +21,14 @@
       <span class="relative" style="--i: 33">s :</span>
     </div>
     <hr class="m-6" />
-      <p>{{day}}</p>
-      <app-category-dropdown
+    <p>{{ day }}</p>
+    <app-category-dropdown
       *ngFor="let category of categories"
-      [name] = category.name
-      [isDeleted] = category.isDeleted
-      [products] = category.products
-      [day] = _day>
-      </app-category-dropdown>
-  </div>
-  <div class="min-w-[350px] h-full hidden">
-    <app-basket></app-basket>
+      [name]="category.name"
+      [isDeleted]="category.isDeleted"
+      [products]="category.products"
+      [day]="_day"
+    >
+    </app-category-dropdown>
   </div>
 </div>

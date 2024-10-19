@@ -2,8 +2,10 @@ import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class ReservationItemDto {
   @IsString()
-  @IsOptional()
   productId: string;
+
+  @IsString()
+  userId: string;
 
   @IsNumber()
   quantity: number;

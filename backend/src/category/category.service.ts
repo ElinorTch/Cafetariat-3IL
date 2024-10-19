@@ -46,4 +46,10 @@ export class CategoryService {
     })
     return update;
   }
+
+  async create(categoryDto: CategorieDto): Promise<Category>{
+    const category = new this.categoryModel(categoryDto);
+    const savedCategory = await category.save();
+    return savedCategory;
+  }
 }

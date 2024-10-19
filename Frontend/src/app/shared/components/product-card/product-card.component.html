@@ -4,7 +4,14 @@
 >
   <div class="h-full w-full">
     <img
-      [src]="'assets' + product.imagePath"
+    *ngIf="imagePath != null"
+    [src]="imagePath"
+      class="max-h-full max-w-full rounded-[15px] object-cover h-[250px] w-full"
+      alt=""
+    />
+    <img
+    *ngIf="imagePath == null"
+    [src]="'../../../assets/products/product.jpg'"
       class="max-h-full max-w-full rounded-[15px] object-cover h-[250px] w-full"
       alt=""
     />

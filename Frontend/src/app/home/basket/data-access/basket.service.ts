@@ -20,6 +20,7 @@ export class BasketService {
   }
 
   clearProductList() {
+    console.log("oui")
     this.productsInBasket = [];
     this.productSource.next(this.productsInBasket);
   }

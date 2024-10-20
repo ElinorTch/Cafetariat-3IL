@@ -32,6 +32,7 @@ export class BasketComponent {
 
   clearBasket(): void {
     this.basketService.clearProductList;
+    this.closeBasket();
   }
 
   removeProduct(index: number): void {

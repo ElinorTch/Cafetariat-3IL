@@ -20,6 +20,8 @@ export class ProductCardComponent {
   @Input() day!: number;
   @Input() product!: any;
 
+  showSuccess: boolean = false;
+
   constructor(
     private reservationService: ReservationsService,
     private authService: AuthService
@@ -41,5 +43,10 @@ export class ProductCardComponent {
       .subscribe((data) => {
         console.log(data);
       });
+    
+    this.showSuccess = true;
+      setTimeout(() => {
+        this.showSuccess = false;
+      }, 3000);
   }
 }

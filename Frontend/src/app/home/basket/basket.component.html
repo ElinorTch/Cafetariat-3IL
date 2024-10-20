@@ -38,40 +38,38 @@
       <hr class="m-6" />
       <!-- Liste des items sélectionnés -->
       <div class="flex-1 w-full space-y-4">
-        @for (item of reservationItem; track $index) {
         <div
           class="flex justify-between items-center bg-[#e2dfd3] p-3 rounded-md"
+          *ngFor="let product of reservationItem; let i = index"
         >
-          <span>{{ item.products.name }}</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 text-red-500 cursor-pointer"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 7l-.867 12.142A2 2 0 0116.136 21H7.864a2 2 0 01-1.997-1.858L5 7m5 4v6m4-6v6M1 7h22m-5 0V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2h12z"
-            />
-          </svg>
+          <span>{{ product.products.name }} - {{ product.products.price }}€</span>
+          <button (click)="removeProduct(i)">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 text-red-500 cursor-pointer"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.136 21H7.864a2 2 0 01-1.997-1.858L5 7m5 4v6m4-6v6M1 7h22m-5 0V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2h12z"
+              />
+            </svg>
+          </button>
         </div>
-        }
       </div>
-      <div class="flex justify-center mt-2">
         <!-- Bonton à config -->
-        <button
-          class="w-3/4 bg-[#0692a2] text-white py-2 px-4 rounded-md m-2"
-          (click)="createReservation()"
-        >
+      <div class="flex justify-between mt-6 space-x-4">
+        <button (click)="clearBasket()" class="bg-red-500 text-white py-2 px-4 rounded-md">
+          Annuler
+        </button>
+        <button (click)="validateBasket()" class="bg-green-500 text-white py-2 px-4 rounded-md">
           Valider la commande
         </button>
-        <button
-          (click)="closeBasket()"
-          class="bg-red-500 text-white py-2 px-4 rounded-md m-2"
-        >
+        <button (click)="closeBasket()" class="bg-[#0692a2] text-white py-2 px-4 rounded-md">
           Fermer
         </button>
       </div>

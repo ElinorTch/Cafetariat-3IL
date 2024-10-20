@@ -10,35 +10,28 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    BasketComponent,
-    ProductCardComponent,
-    CategoryDropdownComponent,
-  ],
+  imports: [CommonModule, RouterModule, BasketComponent, ProductCardComponent, CategoryDropdownComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit{
   _day!: number;
   @Input() set day(day: number) {
     this._day = day;
+    console.log(day);
   }
   categories: any = [];
 
-  constructor(
-    private productService: ProductsService,
-    private categoryService: CategoriesService
-  ) {}
+  constructor(private productService: ProductsService, private categoryService: CategoriesService) {}
 
   ngOnInit() {
     this.getAllCategories();
   }
 
-  getAllCategories() {
-    this.categoryService.getCategories().subscribe((data: any) => {
+  getAllCategories(){
+    this.categoryService.getCategories().subscribe((data: any) =>{
       this.categories = data;
+      console.log(this.categories);
     });
   }
 }

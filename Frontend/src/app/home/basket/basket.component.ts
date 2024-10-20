@@ -1,49 +1,50 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReservationsService } from '../../reservations/data-access/reservations.service';
-import { AuthService } from '../../auth/data-access/auth.service';
+import { BasketService } from './data-access/basket.service';
 
 @Component({
   selector: 'app-basket',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './basket.component.html',
-  styleUrl: './basket.component.scss',
+  styleUrl: './basket.component.scss'
 })
+
 export class BasketComponent {
+  productsInBasket: any[] = [];
   showBasket: boolean = true;
-  reservationItem: any = [];
 
-  constructor(
-    private reservationService: ReservationsService,
-    private authService: AuthService
-  ) {}
+  constructor(private basketService: BasketService) {}
 
-  ngOnInit() {
-    this.getReservationItem();
+  addProduct(product: any): void{
+    this.productsInBasket.push(product);
   }
 
+  ngOnInit(): void {
+    this.basketService.currentProduct.subscribe(products => {
+      this.productsInBasket = products;
+    });
+  }
+  
   closeBasket(): void {
     this.showBasket = false;
   }
 
-  getReservationItem() {
-    this.reservationService
-      .getReservationItemByUser(this.authService.getUser().sub)
-      .subscribe((data) => {
-        console.log(data);
-        this.reservationItem = data;
-      });
+  clearBasket(): void {
+    this.basketService.clearProductList;
   }
 
-  createReservation() {
-    const reservation = {
-      userId: this.authService.getUser().sub,
-      reservationItem: this.reservationItem,
-      status: 'pending',
-    };
-    this.reservationService.createReservation(reservation).subscribe((data) => {
-      console.log(data);
-    });
+  removeProduct(index: number): void {
+    this.basketService.clearProduct(index);
+  }
+  
+  validateBasket(): void {
+    if (this.productsInBasket.length === 0) {
+      alert('Votre panier est vide');
+    } else {
+      this.basketService.addProductList(this.productsInBasket);
+      this.basketService.clearProductList();
+      alert('Commande validée !');
+    }
   }
 }

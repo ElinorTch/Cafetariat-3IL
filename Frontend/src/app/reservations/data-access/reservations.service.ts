@@ -9,10 +9,6 @@ export class ReservationsService {
 
   constructor(private http: HttpClient) {}
 
-  createReservation(reservation: any) {
-    return this.http.post(`${this.api_URL}/reservations`, reservation);
-  }
-
   getReservation(filter?: string) {
     const options = filter
       ? { params: new HttpParams().set('status', filter) }
@@ -29,13 +25,5 @@ export class ReservationsService {
 
   getReservationItem(id: string) {
     return this.http.get(`${this.api_URL}/reservationsItem/${id}`);
-  }
-
-  getReservationItemByUser(userId: string) {
-    return this.http.get(`${this.api_URL}/reservationsItem/user/${userId}`);
-  }
-
-  addReservationItem(item: any) {
-    return this.http.post(`${this.api_URL}/reservationsItem`, item);
   }
 }

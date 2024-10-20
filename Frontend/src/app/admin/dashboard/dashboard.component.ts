@@ -4,10 +4,10 @@ import { RouterModule } from '@angular/router';
 import { ReservationCardComponent } from '../../shared/components/reservation-card/reservation-card.component';
 import { ReservationsService } from '../../reservations/data-access/reservations.service';
 import { CommonModule } from '@angular/common';
-import { Dialog} from '@angular/cdk/dialog';
+import { Dialog, DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
 import { ReservationDetailsComponent } from '../../reservations/reservation-details/reservation-details.component';
 import { getTotalPrice } from '../../utils/price';
-import { CreateProductComponent } from '../create-element/create-product/create-product.component';
+import { CategoryDropdownComponent } from '../../shared/components/category-dropdown/category-dropdown.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +16,6 @@ import { CreateProductComponent } from '../create-element/create-product/create-
     RouterModule,
     DashboardCardComponent,
     ReservationCardComponent,
-    CreateProductComponent
   ],
   standalone: true,
   templateUrl: './dashboard.component.html',
@@ -27,7 +26,6 @@ export class DashboardComponent implements OnInit {
   pendingReservations: number = 0;
   completedReservations: number = 0;
   canceledReservations: number = 0;
-  showCreateProduct: boolean = false;
   dialog = inject(Dialog);
 
   constructor(private reservationService: ReservationsService) {}
@@ -68,9 +66,5 @@ export class DashboardComponent implements OnInit {
         reservation,
       },
     });
-  }
-
-  handleClosePopup() {
-    this.showCreateProduct = false;
   }
 }

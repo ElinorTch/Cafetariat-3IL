@@ -1,57 +1,45 @@
-<<<<<<< Updated upstream
-import { Component, Input } from '@angular/core';
-=======
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { BasketService } from '../../../home/basket/data-access/basket.service';
-import { BasketComponent } from '../../../home/basket/basket.component';
->>>>>>> Stashed changes
+import { CommonEngine } from '@angular/ssr';
+import { ReservationsService } from '../../../reservations/data-access/reservations.service';
+import { AuthService } from '../../../auth/data-access/auth.service';
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-<<<<<<< Updated upstream
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
 })
 export class ProductCardComponent {
-  @Input() link!: string;
-=======
-  imports: [CommonModule, BasketComponent],
-  templateUrl: './product-card.component.html',
-  styleUrl: './product-card.component.scss',
-})
-export class ProductCardComponent{
   @Input() imagePath!: string;
   @Input() name!: string;
   @Input() price!: string;
   @Input() isDeleted!: boolean;
   @Input() disponibilityDays!: number[];
   @Input() day!: number;
+  @Input() product!: any;
 
-  showSuccess: boolean = false;
+  constructor(
+    private reservationService: ReservationsService,
+    private authService: AuthService
+  ) {}
 
-  constructor(private basketService: BasketService) {}
-
-  getDay(){
-    return Number(this.day)
+  getDay() {
+    return Number(this.day);
   }
 
-  addToBasket() {
-    const product = {
-      name: this.name,
-      price: this.price,
-      imagePath: this.imagePath,
-      day: this.day
+  addItem(item: any) {
+    const reservationItem = {
+      userId: this.authService.getUser().sub,
+      productId: item._id,
+      quantity: 1,
+      status: 'pending',
     };
-
-    this.basketService.addProduct(product);
-
-    this.showSuccess = true;
-    setTimeout(() => {
-      this.showSuccess = false;
-    }, 3000);
+    this.reservationService
+      .addReservationItem(reservationItem)
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
->>>>>>> Stashed changes
 }

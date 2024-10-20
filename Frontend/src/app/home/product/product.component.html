@@ -21,22 +21,14 @@
       <span class="relative" style="--i: 33">s :</span>
     </div>
     <hr class="m-6" />
-    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-      <app-product-card [link]="'assets/products/food.jpg'"></app-product-card>
-      <app-product-card
-        [link]="'assets/products/product.jpg'"
-      ></app-product-card>
-      <app-product-card [link]="'assets/products/food.jpg'"></app-product-card>
-      <app-product-card
-        [link]="'assets/products/product.jpg'"
-      ></app-product-card>
-      <app-product-card [link]="'assets/products/food.jpg'"></app-product-card>
-      <app-product-card
-        [link]="'assets/products/product.jpg'"
-      ></app-product-card>
-    </div>
-  </div>
-  <div class="min-w-[350px] h-full hidden">
-    <app-basket></app-basket>
+    <p>{{ day }}</p>
+    <app-category-dropdown
+      *ngFor="let category of categories"
+      [name]="category.name"
+      [isDeleted]="category.isDeleted"
+      [products]="category.products"
+      [day]="_day"
+    >
+    </app-category-dropdown>
   </div>
 </div>

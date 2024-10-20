@@ -33,6 +33,8 @@ export class ProductService {
           name: productDto.name,
           price: productDto.price,
           isDeleted: productDto.isDeleted,
+          disponibilityDays: productDto.disponibilityDays,
+          imagePath: productDto.imagePath
         },
       });
     } else {
@@ -42,6 +44,8 @@ export class ProductService {
           price: productDto.price,
           category: category,
           isDeleted: productDto.isDeleted,
+          disponibilityDays: productDto.disponibilityDays,
+          imagePath: productDto.imagePath
         },
       });
       this.categoryService.updateCategoryProduct(category, product);

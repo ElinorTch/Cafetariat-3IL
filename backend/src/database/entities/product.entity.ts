@@ -15,16 +15,19 @@ export class Product extends BaseEntity {
   @Prop({ required: true })
   price: number;
 
-  @Prop({ required: true })
-  day: string;
-
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Category' })
   category: Category;
+
+  @Prop({required: false })
+  imagePath: string;
 
   @Prop({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ReservationItem' }],
   })
   reservationItem: ReservationItem[];
+
+  @Prop({required: false})
+  disponibilityDays: number[];
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);

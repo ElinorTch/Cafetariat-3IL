@@ -19,6 +19,13 @@ export class ReservationItemController {
     return this.reservationItemService.findAll(filters);
   }
 
+  @Get('user/:id')
+  async getReservationByUser(
+    @Param('id') id: string,
+  ): Promise<ReservationItem[]> {
+    return this.reservationItemService.findByUser(id);
+  }
+
   @Get(':id')
   async getById(@Param('id') id: string): Promise<ReservationItem> {
     return this.reservationItemService.getById(id);

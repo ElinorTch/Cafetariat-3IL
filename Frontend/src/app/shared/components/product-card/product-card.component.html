@@ -10,9 +10,12 @@
     <p>Pain au chocolat</p>
     <p>3.00euro</p>
   </div>
-  <div
+  <button
+    (click)="addToBasket()"
+
     class="w-full h-full flex justify-between bg-charte-blue rounded-[15px] cursor-pointer text-white p-2"
   >
     Ajouter au panier
-  </div>
+  </button>
+  <span class="text-green-400" *ngIf="showSuccess">Ajout effectuer, voir le panier en haut à droite</span>
 </div>

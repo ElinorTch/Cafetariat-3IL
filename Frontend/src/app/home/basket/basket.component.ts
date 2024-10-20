@@ -31,7 +31,7 @@ export class BasketComponent {
   }
 
   clearBasket(): void {
-    this.basketService.clearProductList;
+    this.basketService.clearProductList();
     this.closeBasket();
   }
 

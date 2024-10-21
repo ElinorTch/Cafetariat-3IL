@@ -4,10 +4,11 @@ import { RouterModule } from '@angular/router';
 import { ReservationCardComponent } from '../../shared/components/reservation-card/reservation-card.component';
 import { ReservationsService } from '../../reservations/data-access/reservations.service';
 import { CommonModule } from '@angular/common';
-import { Dialog} from '@angular/cdk/dialog';
+import { Dialog } from '@angular/cdk/dialog';
 import { ReservationDetailsComponent } from '../../reservations/reservation-details/reservation-details.component';
 import { getTotalPrice } from '../../utils/price';
 import { CreateProductComponent } from '../create-element/create-product/create-product.component';
+import { AuthService } from '../../auth/data-access/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +17,7 @@ import { CreateProductComponent } from '../create-element/create-product/create-
     RouterModule,
     DashboardCardComponent,
     ReservationCardComponent,
-    CreateProductComponent
+    CreateProductComponent,
   ],
   standalone: true,
   templateUrl: './dashboard.component.html',
@@ -29,11 +30,20 @@ export class DashboardComponent implements OnInit {
   canceledReservations: number = 0;
   showCreateProduct: boolean = false;
   dialog = inject(Dialog);
+  user: any;
 
-  constructor(private reservationService: ReservationsService) {}
+  constructor(
+    private reservationService: ReservationsService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
+    this.getUser();
     this.getReservations();
+  }
+
+  getUser() {
+    this.user = this.authService.getUser();
   }
 
   getReservations(filter?: string): void {

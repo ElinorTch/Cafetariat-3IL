@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { CommonEngine } from '@angular/ssr';
+import { Component, Input } from '@angular/core';
 import { ReservationsService } from '../../../reservations/data-access/reservations.service';
 import { AuthService } from '../../../auth/data-access/auth.service';
 

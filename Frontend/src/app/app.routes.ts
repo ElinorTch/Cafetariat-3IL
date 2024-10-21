@@ -44,13 +44,14 @@ export const routes: Routes = [
     component: AuthLayoutComponent,
     canActivate: [noAuthGuard],
     children: [
-      {
-        path: 'signup',
-        component: SignupComponent,
-      },
+      { path: '', redirectTo: 'signin', pathMatch: 'full' },
       {
         path: 'signin',
         component: SigninComponent,
+      },
+      {
+        path: 'signup',
+        component: SignupComponent,
       },
     ],
   },

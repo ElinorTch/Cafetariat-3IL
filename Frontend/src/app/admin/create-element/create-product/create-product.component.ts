@@ -11,62 +11,64 @@ import { BrowserModule } from '@angular/platform-browser';
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './create-product.component.html',
-  styleUrl: './create-product.component.scss'
 })
 export class CreateProductComponent {
-    categories: any[] = [];
-    categoryName: string = '';
-    isProductForm: boolean = true;
-    productName: string = '';
-    productPrice: number = 0;
-    selectedCategory: string = '';
-    selectedDays: number[] = [];
-    selectedFile: File | null = null;
-    successMessage: string = '';
-    errorMessage: string = '';
+  categories: any[] = [];
+  categoryName: string = '';
+  isProductForm: boolean = true;
+  productName: string = '';
+  productPrice: number = 0;
+  selectedCategory: string = '';
+  selectedDays: number[] = [];
+  selectedFile: File | null = null;
+  successMessage: string = '';
+  errorMessage: string = '';
 
+  @Output() close = new EventEmitter<void>();
 
-    @Output() close = new EventEmitter<void>();
+  constructor(
+    private productService: ProductsService,
+    private categoryService: CategoriesService,
+    private http: HttpClient
+  ) {}
 
-    constructor(private productService: ProductsService, private categoryService: CategoriesService, private http: HttpClient) {}
+  ngOnInit(): void {
+    this.getCategories();
+  }
 
-    ngOnInit(): void {
-      this.getCategories();
+  getCategories() {
+    this.categoryService.getCategories().subscribe((data: any) => {
+      this.categories = data; // Stocker les catégories reçues
+    });
+  }
+
+  closePopup() {
+    this.close.emit();
+  }
+
+  closePopupOnClickOutside(event: MouseEvent) {
+    const targetElement = event.target as HTMLElement;
+    if (targetElement.classList.contains('fixed')) {
+      this.closePopup();
     }
+  }
 
-    getCategories() {
-      this.categoryService.getCategories().subscribe((data: any) => {
-        this.categories = data;  // Stocker les catégories reçues
-      });
+  onDayChange(event: any, dayNumber: number) {
+    if (event.target.checked) {
+      // Ajoute le jour sélectionné
+      this.selectedDays.push(dayNumber);
+    } else {
+      // Retire le jour si la case est décochée
+      this.selectedDays = this.selectedDays.filter((day) => day !== dayNumber);
     }
-    
-    closePopup() {
-      this.close.emit()
-    }
+  }
 
-    closePopupOnClickOutside(event: MouseEvent) {
-      const targetElement = event.target as HTMLElement;
-      if (targetElement.classList.contains('fixed')) {
-        this.closePopup();
-      }
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
     }
-
-    onDayChange(event: any, dayNumber: number) {
-      if (event.target.checked) {
-        // Ajoute le jour sélectionné
-        this.selectedDays.push(dayNumber);
-      } else {
-        // Retire le jour si la case est décochée
-        this.selectedDays = this.selectedDays.filter(day => day !== dayNumber);
-      }
-    }
-
-    onFileSelected(event: any) {
-      const file = event.target.files[0];
-      if (file) {
-        this.selectedFile = file;
-      }
-    }
+  }
 
   submitForm() {
     const formData = new FormData();
@@ -87,22 +89,21 @@ export class CreateProductComponent {
 
         setTimeout(() => {
           this.successMessage = '';
-      }, 3000);
+        }, 3000);
       },
       (error) => {
         console.error('Erreur lors de la création du produit', error);
-        this.errorMessage = 'Erreur : ' + (error.error.message || 'Une erreur est survenue.');
+        this.errorMessage =
+          'Erreur : ' + (error.error.message || 'Une erreur est survenue.');
         this.successMessage = '';
       }
     );
-    
   }
 
-  submitFormCategory(){
-    
+  submitFormCategory() {
     const data = {
-      name: this.categoryName
-    }
+      name: this.categoryName,
+    };
 
     this.categoryService.createCategory(data).subscribe(
       (response) => {
@@ -113,14 +114,14 @@ export class CreateProductComponent {
 
         setTimeout(() => {
           this.successMessage = '';
-      }, 3000);
+        }, 3000);
       },
       (error) => {
         console.error('Erreur lors de la création de la catégorie', error);
-        this.errorMessage = 'Erreur : ' + (error.error.message || 'Une erreur est survenue.');
+        this.errorMessage =
+          'Erreur : ' + (error.error.message || 'Une erreur est survenue.');
         this.successMessage = '';
       }
     );
-    
   }
 }

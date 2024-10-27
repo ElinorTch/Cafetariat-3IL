@@ -43,7 +43,7 @@ export class BasketComponent {
       status: 'pending',
     };
     this.reservationService.createReservation(reservation).subscribe((data) => {
-      console.log(data);
+      this.closeBasket();
     });
   }
 }

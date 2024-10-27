@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ReservationsService } from '../../../reservations/data-access/reservations.service';
 import { AuthService } from '../../../auth/data-access/auth.service';
+import { finalize, map } from 'rxjs';
 
 @Component({
   selector: 'app-product-card',
@@ -18,6 +19,8 @@ export class ProductCardComponent {
   @Input() disponibilityDays!: number[];
   @Input() day!: number;
   @Input() product!: any;
+
+  showSuccess: boolean = false;
 
   constructor(
     private reservationService: ReservationsService,
@@ -38,7 +41,14 @@ export class ProductCardComponent {
     this.reservationService
       .addReservationItem(reservationItem)
       .subscribe((data) => {
-        console.log(data);
+        this.showAddedItem();
       });
+  }
+
+  showAddedItem() {
+    this.showSuccess = true;
+    setTimeout(() => {
+      this.showSuccess = false;
+    }, 3000);
   }
 }
